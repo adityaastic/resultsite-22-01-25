@@ -1,0 +1,91 @@
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+@media screen and (max-width: 767px) {
+	
+.header-tabs ul {
+    flex-wrap: nowrap;
+    overflow: auto;
+}
+
+.table tr th, .table tr td {
+    white-space: nowrap;
+}
+
+.header-tabs ul li a {
+    white-space: nowrap;
+}
+
+.header-tabs ul li a {
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+.footer-ft {
+    position: unset;
+}
+
+.footer-ft ul li a {
+    font-size: 14px;
+    padding: 8px;
+
+}
+
+
+.profile-content {
+
+    display: block;
+    text-align: center;
+}
+
+
+.babaji-name {
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.profile-img {
+
+    text-align: center;
+    display: block;
+    margin-bottom: 16px;
+}
+
+
+.cl-change {
+    font-size: 18px;
+
+}
+
+
+.cl-change h3 {
+    font-size: 50px;
+
+}
+
+.result-of .boxes {
+
+    padding: 5px;
+
+    font-size: 12px;
+}
+
+
+p {
+    font-size: 15px;
+    line-height: 23px;
+}
+
+.profile-container h5 {
+    font-size: 18px;
+}
+
+
+.login-page form {
+    padding: 15px;
+    padding-top: 75px;}
+
+
+
+
+}
