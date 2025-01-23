@@ -89,3 +89,11 @@ p {
 
 
 }
+
+@media screen and (max-width: 767px) {
+    p {
+        font-size: 15px;
+        line-height: 23px;
+        padding: 10px;
+    }
+}

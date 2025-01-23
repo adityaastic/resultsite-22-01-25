@@ -15,7 +15,7 @@ export const GreetingBanner = () => {
         </div>
         <div className="babaji-name" >
           {/* {(greetingBanner && !isLoading) &&  */}
-          <div className="name" 
+          <div className="name1" 
           dangerouslySetInnerHTML={{ __html: greetingBanner?.ticker }}
           style={{fontSize:"1.5rem"}}
           >
@@ -48,26 +48,80 @@ export const NoticeBanner = () => {
 }
 
 export const ResultsBanner = () => {
-  const { latestResults } = useLatestResults()
-
-
-  console.log("((((((((((((((((((((((((((((((((((((",latestResults)
+  const { latestResults } = useLatestResults();
 
   return (
-    <div className="card-inner result-inner" style={{display:"flex", flexDirection:"row", justifyContent:"space-between", height:"16rem"}}>
-      <div className="live-result-div" style={{display:"flex", justifyContent:"flex-start", alignItems:"center"}} >
-        <h3 style={{fontSize:"4rem", fontWeight:"400",fontFamily: "KoPub Batang"}}>LIVE RESULT</h3>
+    <div
+      className="results-banner-container"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        height: "vh",
+        background: "linear-gradient(135deg, #f6d365 0%, #fda085 100%)",
+        padding: "40px",
+        color: "#fff",
+        marginBottom:'20px'
+      }}
+    >
+      <h1 style={{ fontSize: "4rem", fontWeight: "700", marginBottom: "20px"}}>
+        LIVE RESULT
+      </h1>
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "2rem",
+          maxWidth: "800px",
+          width: "100%",
+        }}
+      >
+        {/* Latest Declared Result */}
+        <div
+          style={{
+            background: "darkgreen",
+            width: "14rem",
+            padding: "5px",
+            borderRadius: "10px",
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+            textAlign: "center",
+            border:"2px solid white"
+          }}
+        >
+          <h5 style={{ fontSize: "1.2rem", fontWeight: "600" }}>
+            {latestResults?.latest_declared_result?.market_name || "Loading..."}
+          </h5>
+          <p style={{ margin: "0.5rem 0 0" }}>
+            {latestResults?.latest_declared_result?.bet_key || "Waiting"}
+          </p>
+        </div>
+
+        {/* Next Declared Result */}
+        <div
+          style={{
+            background: "#D87B2E",
+            width: "14rem",
+            padding: "5px",
+            borderRadius: "15px",
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+            textAlign: "center",
+            border:"2px solid white"
+          }}
+        >
+          <h5 style={{ fontSize: "1.2rem", fontWeight: "600" }}>
+            {latestResults?.next_declared_result?.market_name || "Loading..."}
+          </h5>
+          <p style={{ margin: "0.5rem 0 0" }}>
+            {latestResults?.next_declared_result?.bet_key || "Waiting"}
+          </p>
+        </div>
       </div>
-      <div style={{display:"flex", flexDirection:"row", width:"44%", justifyContent:"space-between", alignItems:"center"}}>
-      <div className="" style={{background:"#D87B2E", maxWidth:"14rem", width:"14rem", height:"auto !important", padding:"0.5rem 0.5rem",display:"flex",flexDirection:"column", justifyContent:"center", alignItems:"center", borderRadius:"10rem", border:"0.1rem solid #FFFFFF"}} >
-        <h5>{latestResults?.latest_declared_result?.market_name}</h5>
-        <p style={{margin:"0", padding:"0"}}> {latestResults?.latest_declared_result?.bet_key || "Waiting"}</p>
-      </div>
-      <div className="" style={{background:"#D87B2E", maxWidth:"14rem", width:"14rem", height:"auto !important",padding:"0.5rem 0.5rem", display:"flex",flexDirection:"column", justifyContent:"center", alignItems:"center", borderRadius:"10rem", border:"0.1rem solid #FFFFFF"}} >
-        <h5>{latestResults?.next_declared_result?.market_name}</h5>
-        <p style={{margin:"0", padding:"0"}}> {latestResults?.next_declared_result?.bet_key || "Waiting"}</p>
-      </div>
-      </div>
+
+      
     </div>
-  )
-}
+  );
+};
