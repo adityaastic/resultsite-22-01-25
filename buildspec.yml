@@ -6,25 +6,23 @@ env:
 phases:
   install:
     commands:
-      - echo Installing Docker...
-      - docker --version  # Verify Docker installation
-      - docker info  # Check Docker service status
+      - echo Installing Node.js...
+      - node --version  # Verify Node.js installation
+      - npm --version   # Verify npm installation
 
   pre_build:
     commands:
-      # Commenting out Docker login if not needed
-      # - echo Logging into Docker Hub (or private registry)...
-      # - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin  # Skip Docker login if not needed
+      - echo Installing dependencies...
+      - npm install      # Install Node.js dependencies
 
   build:
     commands:
-      - echo Building Docker image...
-      - docker build -t bgmgameresult:latest .  # Build the Docker image
+      - echo Building Node.js app...
+      - npm run build     # Build the app (replace with your custom build script)
 
   post_build:
     commands:
-      - echo Docker image build complete.
-      - docker images  # List images (optional)
+      - echo Node.js app build complete.
 
 artifacts:
   files:
@@ -32,4 +30,4 @@ artifacts:
 
 cache:
   paths:
-    - '/root/.npm/**/*'  # Optional: Cache npm dependencies
+    - '/root/.npm/**/*'  # Cache npm dependencies to speed up subsequent builds
