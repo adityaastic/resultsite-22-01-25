@@ -1,12 +1,16 @@
 version: 0.2
 
+env:
+  image: "aws/codebuild/standard:5.0"  # Docker-enabled CodeBuild image
+
 phases:
   install:
-    runtime-versions:
-      docker: 19  # Ensure you are using the correct Docker version for your build
     commands:
-      - echo Installing dependencies...
-      - docker-compose -f docker-compose.yml build  # Build Docker images using docker-compose
+      - echo Installing Docker and dependencies...
+      - docker --version  # Ensure Docker is available
+      - docker-compose -v  # Ensure docker-compose is available
+      - echo Building Docker containers using docker-compose...
+      - docker-compose -f docker-compose.yml build  # Build Docker images
 
   pre_build:
     commands:
@@ -15,13 +19,13 @@ phases:
 
   build:
     commands:
-      - echo Building and running containers...
+      - echo Starting Docker containers...
       - docker-compose -f docker-compose.yml up -d  # Start containers in detached mode
 
   post_build:
     commands:
-      - echo Running tests or other post-build tasks...
-      # You can add additional steps like tests here, e.g., `docker exec web1 npm test`
+      - echo Running post-build tasks...
+      - docker-compose logs  # View logs from Docker containers (optional)
 
 artifacts:
   files:
@@ -31,4 +35,3 @@ artifacts:
 cache:
   paths:
     - '/root/.npm/**/*'  # Optional: Cache npm dependencies to speed up builds
-
