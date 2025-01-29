@@ -8,13 +8,14 @@ phases:
     commands:
       - echo Installing Docker...
       - sudo yum install -y docker  # Use Amazon Linux's package manager to install Docker
+      - docker --version  # Verify Docker installation
       - sudo service docker start  # Start Docker service
       - sudo usermod -a -G docker ec2-user  # Add the ec2-user to Docker group
-      - docker --version  # Verify Docker installation
+      - sudo docker info  # Verify Docker service info
       - echo Installing Docker Compose...
       - sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose  # Download Docker Compose
       - sudo chmod +x /usr/local/bin/docker-compose  # Make it executable
-      - docker-compose --version 
+      - docker-compose --version  # Verify Docker Compose installation
   pre_build:
     commands:
       - echo Logging into Docker Hub (or private registry)...
