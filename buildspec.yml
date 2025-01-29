@@ -12,24 +12,24 @@ phases:
 
   pre_build:
     commands:
-      - echo Logging into Docker Hub (or private registry)...
-      - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin  # Replace with your Docker registry credentials if needed
+      # Commenting out Docker login if not needed
+      # - echo Logging into Docker Hub (or private registry)...
+      # - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin  # Skip Docker login if not needed
 
   build:
     commands:
       - echo Building Docker image...
-      - docker build -t bgmgameresult:latest .  # Build the Docker image from the current directory (.) and tag it as 'bgmgameresult'
+      - docker build -t bgmgameresult:latest .  # Build the Docker image
 
   post_build:
     commands:
       - echo Docker image build complete.
-      - docker images  # List the images to confirm they've been built (optional)
+      - docker images  # List images (optional)
 
 artifacts:
   files:
-    - '**/*'  # Include all necessary files (e.g., build artifacts or logs)
-  discard-paths: yes
+    - '**/*'  # Include all necessary files
 
 cache:
   paths:
-    - '/root/.npm/**/*'  # Optional: Cache npm dependencies to speed up builds
+    - '/root/.npm/**/*'  # Optional: Cache npm dependencies
