@@ -7,11 +7,8 @@ phases:
   install:
     commands:
       - echo Installing Docker...
-      - sudo yum install -y docker  # Use Amazon Linux's package manager to install Docker
       - docker --version  # Verify Docker installation
-      - sudo service docker start  # Start Docker service
-      - sudo usermod -a -G docker ec2-user  # Add the ec2-user to Docker group
-      - sudo docker info  # Verify Docker service info
+      - docker info  # Check Docker service status
       - echo Installing Docker Compose...
       - sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose  # Download Docker Compose
       - sudo chmod +x /usr/local/bin/docker-compose  # Make it executable
@@ -23,13 +20,13 @@ phases:
 
   build:
     commands:
-      - echo Starting Docker containers...
-      - docker-compose -f docker-compose.yml up -d  # Start containers in detached mode
+      - echo Building Docker images...
+      - docker-compose -f docker-compose.yml build  # Build the Docker images from the docker-compose file
 
   post_build:
     commands:
       - echo Running post-build tasks...
-      - docker-compose logs  # View logs from Docker containers (optional)
+      - docker-compose images  # List the images to confirm they've been built (optional)
 
 artifacts:
   files:
