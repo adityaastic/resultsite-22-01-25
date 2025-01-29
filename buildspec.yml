@@ -9,10 +9,7 @@ phases:
       - echo Installing Docker...
       - docker --version  # Verify Docker installation
       - docker info  # Check Docker service status
-      - echo Installing Docker Compose...
-      - sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose  # Download Docker Compose
-      - sudo chmod +x /usr/local/bin/docker-compose  # Make it executable
-      - docker-compose --version  # Verify Docker Compose installation
+
   pre_build:
     commands:
       - echo Logging into Docker Hub (or private registry)...
@@ -20,13 +17,13 @@ phases:
 
   build:
     commands:
-      - echo Building Docker images...
-      - docker-compose -f docker-compose.yml build  # Build the Docker images from the docker-compose file
+      - echo Building Docker image...
+      - docker build -t bgmgameresult:latest .  # Build the Docker image from the current directory (.) and tag it as 'bgmgameresult'
 
   post_build:
     commands:
-      - echo Running post-build tasks...
-      - docker-compose images  # List the images to confirm they've been built (optional)
+      - echo Docker image build complete.
+      - docker images  # List the images to confirm they've been built (optional)
 
 artifacts:
   files:
