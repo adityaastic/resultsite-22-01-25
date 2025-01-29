@@ -6,12 +6,16 @@ env:
 phases:
   install:
     commands:
-      - echo Installing Docker and dependencies...
-      - docker --version  # Ensure Docker is available
+      - echo Installing Docker and Docker Compose...
+      - curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+      - chmod +x /usr/local/bin/docker-compose
+      - docker-compose --version  # Verify Docker Compose is installed
+      - docker --version  # Verify Docker is available
       - docker-compose -v  # Ensure docker-compose is available
+      - echo Starting Docker service...
+      - service docker start  # Start Docker service if not already running
       - echo Building Docker containers using docker-compose...
-      - docker-compose -f docker-compose.yml build  # Build Docker images
-
+      - docker-compose -f docker-compose.yml build
   pre_build:
     commands:
       - echo Logging into Docker Hub (or private registry)...
