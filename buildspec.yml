@@ -1,34 +1,33 @@
 version: 0.2
 
+env:
+  image: "aws/codebuild/standard:5.0"  # Docker-enabled CodeBuild image
+
 phases:
   install:
-    runtime-versions:
-      docker: 19  # Ensure you are using the correct Docker version for your build
     commands:
-      - echo Installing dependencies...
-      - docker-compose -f docker-compose.yml build  # Build Docker images using docker-compose
+      - echo Installing Node.js...
+      - node --version  # Verify Node.js installation
+      - npm --version   # Verify npm installation
 
   pre_build:
     commands:
-      - echo Logging into Docker Hub (or private registry)...
-      - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin  # Replace with your Docker registry credentials if needed
+      - echo Installing dependencies...
+      - npm install      # Install Node.js dependencies
 
   build:
     commands:
-      - echo Building and running containers...
-      - docker-compose -f docker-compose.yml up -d  # Start containers in detached mode
+      - echo Building Node.js app...
+      - npm run build     # Build the app (replace with your custom build script)
 
   post_build:
     commands:
-      - echo Running tests or other post-build tasks...
-      # You can add additional steps like tests here, e.g., `docker exec web1 npm test`
+      - echo Node.js app build complete.
 
 artifacts:
   files:
-    - '**/*'  # Include all necessary files (e.g., build artifacts or logs)
-  discard-paths: yes
+    - '**/*'  # Include all necessary files
 
 cache:
   paths:
-    - '/root/.npm/**/*'  # Optional: Cache npm dependencies to speed up builds
-
+    - '/root/.npm/**/*'  # Cache npm dependencies to speed up subsequent builds
