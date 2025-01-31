@@ -2,13 +2,13 @@ import { Link, useLocation } from "react-router-dom"
 import { websiteUrl } from "../assets/index.ts"
 
 const tabs = [
-  { name: "HomeTest", to: "/" },
-  { name: "AboutTest", to: "/" },
-  { name: "ContactTest", to: "/contact" },
-  { name: "FAQTest", to: "/" },
-  { name: "DisclaimerTest", to: "/" },
-  { name: "Privacy PolicyTest", to: "/" },
-  { name: "SitemapTest", to: "/" },
+  { name: "Home", to: "/" },
+  { name: "About", to: "/" },
+  { name: "Contact", to: "/contact" },
+  { name: "FAQ", to: "/" },
+  { name: "Disclaimer", to: "/" },
+  { name: "Privacy Policy", to: "/" },
+  { name: "Sitemap", to: "/" },
 ]
 
 const Footer = () => {
