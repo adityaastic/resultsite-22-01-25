@@ -16,6 +16,7 @@ fi
 
 # Ensure Docker is running
 docker rm -f $(docker ps -aq) || { echo "Failed to remove containers"; exit 1; }
+docker system prune -a --volumes -f || { echo "Failed to prune Docker system"; exit 1; }
 sudo systemctl start docker
 
 # Restart application containers
