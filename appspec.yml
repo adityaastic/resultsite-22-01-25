@@ -23,6 +23,9 @@ hooks:
     - location: scripts/start_application.sh
       timeout: 600
       runas: ec2-user
+    - location: scripts/reconnect_target_group.sh
+      timeout: 300
+      runas: ec2-user  
   ValidateService:
     - location: scripts/validate_service.sh
       timeout: 300
