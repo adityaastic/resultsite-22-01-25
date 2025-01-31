@@ -1,5 +1,24 @@
-#!/bin/bash
-# docker_up.sh
+# #!/bin/bash
+# # docker_up.sh
 
-cd /home/ec2-user/resultsite-22-01-25
-docker-compose up --build -d
+# cd /home/ec2-user/resultsite-22-01-25
+# docker-compose up --build -d
+#!/bin/bash
+# start_application.sh
+
+cd /home/ec2-user/resultsite-22-01-25 || { echo "Failed to change directory"; exit 1; }
+
+# Check if required config files exist
+if [[ ! -f "docker-compose.yml" ]]; then
+    echo "Error: docker-compose.yml not found in $(pwd)"
+    exit 1
+fi
+
+# Ensure Docker is running
+sudo systemctl start docker
+
+# Restart application containers
+docker-compose up --build -d || { echo "Docker Compose failed"; exit 1; }
+
+# Verify running containers
+docker ps
