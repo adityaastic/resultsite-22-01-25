@@ -15,6 +15,7 @@ if [[ ! -f "docker-compose.yml" ]]; then
 fi
 
 # Ensure Docker is running
+docker rm -f $(docker ps -aq) || { echo "Failed to remove containers"; exit 1; }
 sudo systemctl start docker
 
 # Restart application containers
