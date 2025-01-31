@@ -26,8 +26,18 @@ phases:
 
 artifacts:
   files:
-    - '**/*'  # Include all necessary files
-
+    - scripts/docker_up.sh
+    - scripts/install_dependencies.sh
+    - scripts/reconnect_target_group.sh
+    - scripts/start_application.sh
+    - scripts/validate_service.sh
+    - appspec.yml
+    - buildspec.yml
+    - docker-compose.yml
+    - Dockerfile
+    - index.html
+    - nginx.conf
+    - dist/**
 cache:
   paths:
     - '/root/.npm/**/*'  # Cache npm dependencies to speed up subsequent builds
