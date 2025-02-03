@@ -7,7 +7,7 @@ INSTANCE_ID="i-06c65f6520f5247f4"
 # Function to check if instance is healthy
 check_instance_health() {
     TARGET_HEALTH=$(aws elbv2 describe-target-health --target-group-arn $TARGET_GROUP_ARN \
-                --query "TargetHealthDescriptions[?Target.Id=='$INSTANCE_ID'].TargetHealth" \
+                --query "TargetHealthDescriptions[?Target.Id=='$INSTANCE_ID'].TargetHealth.State" \
                 --output text)
 
     echo "Current Target Health: $TARGET_HEALTH"
@@ -18,10 +18,16 @@ check_instance_health() {
     fi
 }
 
-# Continuously check the health until the instance becomes healthy
-while true
+# Max attempts to check the health
+MAX_ATTEMPTS=5
+ATTEMPT=0
+
+# Continuously check the health until the instance becomes healthy or max attempts are reached
+while [[ $ATTEMPT -lt $MAX_ATTEMPTS ]]
 do
-    
+    ((ATTEMPT++))
+    echo "Attempt $ATTEMPT: Checking if the site is up..."
+
     # Check the health of the instance
     check_instance_health
 
@@ -33,7 +39,10 @@ do
         echo "Instance $INSTANCE_ID is not healthy. Re-registering..."
         aws elbv2 register-targets --target-group-arn $TARGET_GROUP_ARN --targets Id=$INSTANCE_ID
         
-        # Wait before the next health check (adjust the interval as needed)
-        sleep 20  # wait for 5 seconds before checking again
+        # Wait before the next health check
+        sleep 20  # wait for 20 seconds before checking again
     fi
 done
+
+echo "Instance $INSTANCE_ID is not healthy after $MAX_ATTEMPTS attempts."
+exit 1
