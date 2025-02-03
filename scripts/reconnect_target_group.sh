@@ -41,7 +41,7 @@ while [[ $ATTEMPT -le $MAX_ATTEMPTS ]]; do
         echo "❌ Instance $INSTANCE_ID is not healthy. Waiting for the next check..."
         
         # Wait before checking again (adjust the interval as needed)
-        sleep 10
+        sleep 30
     fi
 
     # Increment attempt counter
