@@ -12,6 +12,9 @@ permissions:
 
 hooks:
   BeforeInstall:
+    - location: scripts/cleanup.sh
+      timeout: 300
+      runas: ec2-user
     - location: scripts/install_dependencies.sh
       timeout: 300
       runas: ec2-user
