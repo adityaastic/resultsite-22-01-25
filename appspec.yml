@@ -2,10 +2,10 @@ version: 0.0
 os: linux
 files:
   - source: /  # All files from the source directory will be copied to the target directory
-    destination: /home/ec2-user/bgmgameresult
+    destination: /home/ec2-user/resultsite-22-01-25
 
 permissions:
-  - object: /home/ec2-user/bgmgameresult
+  - object: /home/ec2-user/resultsite-22-01-25
     owner: ec2-user
     group: ec2-user
     mode: 755
