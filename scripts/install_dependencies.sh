@@ -21,5 +21,11 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 # Verify installation
+sudo amazon-linux-extras enable nginx1
+sudo yum install -y nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
+
 docker --version
 docker-compose --version
+nginx -v
