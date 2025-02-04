@@ -16,25 +16,9 @@ do
 
     # If curl fails, check if the instance is healthy in the target group
     echo "Attempt $i failed, checking target group health..."
-    
-    # Extract target ID properly from the site response or from AWS EC2 instance metadata if needed
-    TARGET_ID=$(curl -s https://bgmgameresult.in/ | awk -F'[/:]' '{print $4}') # Ensure this is extracting the correct value
-    
-    # Debug output to check if the TARGET_ID is correct
-    echo "Extracted Target ID: $TARGET_ID"
-    
-    if [ -z "$TARGET_ID" ]; then
-        echo "Target ID is empty. Exiting."
-        exit 1
-    fi
-
-    # Perform the target health check
     TARGET_HEALTH=$(aws elbv2 describe-target-health --target-group-arn $TARGET_GROUP_ARN \
-                    --query "TargetHealthDescriptions[?Target.Id=='$TARGET_ID'].TargetHealth.State" \
+                    --query "TargetHealthDescriptions[?Target.Id=='$(curl -s https://bgmgameresult.in/ | awk -F'[/:]' '{print $4}')]].TargetHealth.State" \
                     --output text)
-    
-    # Debug output to check the result of the health check
-    echo "Target Health Status: $TARGET_HEALTH"
 
     # Check if the target health is 'healthy'
     if [[ "$TARGET_HEALTH" == "healthy" ]]; then
