@@ -13,7 +13,7 @@ services:
       - /etc/ssl/private:/etc/ssl/private  # Mount the host's private key directory
     depends_on:
       - web1
-      - web2
+      # - web2
 
   web1:
     build:
