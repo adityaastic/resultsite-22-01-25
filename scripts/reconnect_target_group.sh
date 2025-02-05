@@ -3,6 +3,7 @@
 # Target Group ARN and Instance ID
 TARGET_GROUP_ARN="arn:aws:elasticloadbalancing:ap-south-1:211125441224:targetgroup/bgmgameresult/81a4b3e76d0eba2f"
 INSTANCE_ID="i-06c65f6520f5247f4"
+PORT=8080  # Add the correct port for the application
 
 # Function to check if instance is healthy
 check_instance_health() {
@@ -37,7 +38,7 @@ do
     else
         # Re-register the instance if it's not healthy
         echo "Instance $INSTANCE_ID is not healthy. Re-registering..."
-        aws elbv2 register-targets --target-group-arn $TARGET_GROUP_ARN --targets Id=$INSTANCE_ID
+        aws elbv2 register-targets --target-group-arn $TARGET_GROUP_ARN --targets Id=$INSTANCE_ID,Port=$PORT
         
         # Wait before the next health check
         sleep 20  # wait for 20 seconds before checking again
@@ -45,4 +46,4 @@ do
 done
 
 echo "Instance $INSTANCE_ID is not healthy after $MAX_ATTEMPTS attempts."
-exit 1
+exit 1  
