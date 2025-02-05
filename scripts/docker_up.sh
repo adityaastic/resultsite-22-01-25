@@ -46,7 +46,7 @@ fi
 # Clean up unused Docker resources
 docker system prune -a --volumes -f || { echo "Failed to prune Docker system"; exit 1; }
 
-sudo systemctl start docker
+
 
 # Restart application containers
 docker-compose up --build -d || { echo "Docker Compose failed"; exit 1; }
