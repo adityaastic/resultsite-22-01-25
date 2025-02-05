@@ -21,7 +21,7 @@ hooks:
       runas: ec2-user
   AfterInstall:
     - location: scripts/docker_up.sh
-      timeout: 600
+      timeout: 1800
       runas: ec2-user
   ApplicationStart:
     - location: scripts/start_application.sh
