@@ -3,7 +3,7 @@
 # Target Group ARN and Instance ID
 TARGET_GROUP_ARN="arn:aws:elasticloadbalancing:ap-south-1:211125441224:targetgroup/bgmgameresult/81a4b3e76d0eba2f"
 INSTANCE_ID="i-06c65f6520f5247f4"
-PORT=8080  # Add the correct port for the application
+  # Add the correct port for the application
 
 # Function to check if instance is healthy
 check_instance_health() {
