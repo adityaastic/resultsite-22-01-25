@@ -1,36 +1,36 @@
-version: 0.0
-os: linux
-files:
-  - source: /  # All files from the source directory will be copied to the target directory
-    destination: /home/ec2-user/resultsite-22-01-25
-file_exists_behavior: OVERWRITE 
+# version: 0.0
+# os: linux
+# files:
+#   - source: /  # All files from the source directory will be copied to the target directory
+#     destination: /home/ec2-user/resultsite-22-01-25
+# file_exists_behavior: OVERWRITE 
 
-permissions:
-  - object: /home/ec2-user/resultsite-22-01-25
-    owner: ec2-user
-    group: ec2-user
-    mode: 755
+# permissions:
+#   - object: /home/ec2-user/resultsite-22-01-25
+#     owner: ec2-user
+#     group: ec2-user
+#     mode: 755
 
-hooks:
-  BeforeInstall:
-    - location: scripts/cleanup.sh
-      timeout: 300
-      runas: ec2-user
-    - location: scripts/install_dependencies.sh
-      timeout: 300
-      runas: ec2-user
-  AfterInstall:
-    - location: scripts/docker_up.sh
-      timeout: 600
-      runas: ec2-user
-  ApplicationStart:
-    - location: scripts/start_application.sh
-      timeout: 600
-      runas: ec2-user
-    - location: scripts/reconnect_target_group.sh
-      timeout: 600
-      runas: ec2-user  
-  ValidateService:
-    - location: scripts/validate_service.sh
-      timeout: 300
-      runas: ec2-user
+# hooks:
+#   BeforeInstall:
+#     - location: scripts/cleanup.sh
+#       timeout: 300
+#       runas: ec2-user
+#     - location: scripts/install_dependencies.sh
+#       timeout: 300
+#       runas: ec2-user
+#   AfterInstall:
+#     - location: scripts/docker_up.sh
+#       timeout: 600
+#       runas: ec2-user
+#   ApplicationStart:
+#     - location: scripts/start_application.sh
+#       timeout: 600
+#       runas: ec2-user
+#     - location: scripts/reconnect_target_group.sh
+#       timeout: 600
+#       runas: ec2-user  
+#   ValidateService:
+#     - location: scripts/validate_service.sh
+#       timeout: 300
+#       runas: ec2-user

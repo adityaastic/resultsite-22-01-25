@@ -4,8 +4,8 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "8080:80"
-      - "8443:443"  # Expose HTTPS port
+      - "80:80"
+      - "443:443"  # Expose HTTPS port
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       - ./dist:/usr/share/nginx/html
@@ -13,7 +13,7 @@ services:
       - /etc/ssl/private:/etc/ssl/private  # Mount the host's private key directory
     depends_on:
       - web1
-      # - web2
+      - web2
 
   web1:
     build:
@@ -23,10 +23,10 @@ services:
     expose:
       - "8000"
 
-  # web2:
-  #   build:
-  #     context: .
-  #   environment:
-  #     - PORT=8001
-  #   expose:
-  #     - "8001"
+   web2:
+    build:
+      context: .
+    environment:
+      - PORT=8001
+    expose:
+      - "8001"
