@@ -1,30 +1,30 @@
-# version: 0.2
+version: 0.2
 
-# env:
-#   image: "aws/codebuild/standard:5.0"  # Docker-enabled CodeBuild image
+env:
+  image: "aws/codebuild/standard:5.0"  # Docker-enabled CodeBuild image
 
-# phases:
-#   install:
-#     commands:
-#       - echo Installing Node.js...
-#       - node --version  # Verify Node.js installation
-#       - npm --version   # Verify npm installation
+phases:
+  install:
+    commands:
+      - echo Installing Node.js...
+      - node --version  # Verify Node.js installation
+      - npm --version   # Verify npm installation
 
-#   pre_build:
-#     commands:
-#       - echo Installing dependencies...
-#       - npm install      # Install Node.js dependencies
+  pre_build:
+    commands:
+      - echo Installing dependencies...
+      - npm install      # Install Node.js dependencies
 
-#   build:
-#     commands:
-#       - echo Building Node.js app...
-#       - npm run build     # Build the app (replace with your custom build script)
+  build:
+    commands:
+      - echo Building Node.js app...
+      - npm run build     # Build the app (replace with your custom build script)
 
-#   post_build:
-#     commands:
-#       - echo Node.js app build complete.
+  post_build:
+    commands:
+      - echo Node.js app build complete.
 
-# artifacts:
-#   files:
-#     - '**/*'
+artifacts:
+  files:
+    - '**/*'
 
