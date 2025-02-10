@@ -25,7 +25,7 @@ export const GreetingBanner = () => {
         </div>
         {/* <div className="cl-change"> */}
         <div className="">
-          <span>TOTAL VISITORS: {visitors && visitors["total_visitor"]}</span>
+          <span>TOTAL VISITORS COUNT: {visitors && visitors["total_visitor"]}</span>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@ export const ResultsBanner = () => {
       }}
     >
       <h1 style={{ fontSize: "4rem", fontWeight: "700", marginBottom: "20px"}}>
-        LIVE RESULT
+        LIVE RESULT 
       </h1>
 
       <div
