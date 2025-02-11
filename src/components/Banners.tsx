@@ -25,7 +25,7 @@ export const GreetingBanner = () => {
         </div>
         {/* <div className="cl-change"> */}
         <div className="">
-          <span>TOTAL VISITORS COUNT : {visitors && visitors["total_visitor"]}</span>
+          <span>TOTAL VISITORS : {visitors && visitors["total_visitor"]}</span>
         </div>
       </div>
     </div>
