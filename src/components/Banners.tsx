@@ -60,7 +60,7 @@ export const ResultsBanner = () => {
         alignItems: "center",
         textAlign: "center",
         height: "vh",
-        background: "linear-gradient(135deg,rgb(245, 169, 18) 0%, #fda085 100%)",
+        background: "linear-gradient(135deg,rgb(12, 92, 24) 0%,rgb(9, 89, 35) 100%)",
         padding: "40px",
         color: "#fff",
         marginBottom:'20px'
