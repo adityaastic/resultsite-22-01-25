@@ -10,9 +10,12 @@
 
 body {
     /* background-color: #c7e5c8; */
-    color: #1d2e36;
+    color: #ffffff;
     font-family: "Jost", sans-serif;
     font-size: 14px;
+    background-color: #000000;
+    text-align: center;
+    padding: 20px;
 }
 
 ::-webkit-scrollbar-track {
@@ -684,13 +687,18 @@ a {
 
     margin-bottom: -1px;
     margin-left: 0px;
+    font-size: 26px;
 }
 
 .two-boxses .boxes:last-child {
     border-right: none;
 }
-
-
+.boxes span{
+    font-size: 16px;
+}
+.new-box span {
+    font-size: 28px;
+}
 
 .result-of .two-boxses .new-box {
     display: flex;
@@ -702,8 +710,8 @@ a {
     transition: background-color 0.3s;
     border: none;
     border-radius: 4px;
-    font-size: 12px;
-    padding: 5px 8px;
+    font-size: 8px;
+    padding: 2px 2px;
 
 }
 
@@ -876,7 +884,7 @@ a {
     /* border-radius: 24px; */
     /* margin: 15px; */
     /* background-color: #c7e5c8; */
-    color: #000000;
+    color: #ffffff;
     margin-top: 30px;
     /* border-top:1px solid rgb(233, 132, 0); */
     /* border-bottom:1px solid rgb(233, 132, 0); */
