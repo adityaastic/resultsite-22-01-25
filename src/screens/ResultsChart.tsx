@@ -7,7 +7,6 @@ import { getDatesOfMonth } from "../utils/time";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-// Function to get the current month in YYYY-MM format
 function getCurrentMonth() {
   const now = new Date();
   const year = now.getFullYear();
@@ -37,19 +36,23 @@ export const ResultsChart = () => {
     setSelectedMonthDates(dates);
   }, [date]);
 
-  // Memoized results
   const memoizedResults = useMemo(() => (Array.isArray(rawResults) ? rawResults : []), [rawResults]);
 
-  // Filter markets where market.status is true
-  const activeMarkets = useMemo(() => markets?.filter((m: IMarket) => m.status === true), [markets]);
+  const isCurrentMonth = useMemo(() => date === getCurrentMonth(), [date]);
 
-  // Filtered results based on market selection
+  const activeMarkets = useMemo(() => {
+    if (isCurrentMonth) {
+    
+      return markets?.filter((m: IMarket) => m.status === true);
+    }
+    return markets; 
+  }, [markets, isCurrentMonth]);
+
   const filteredResults = useMemo(() => {
     if (!market) return memoizedResults;
     return memoizedResults.filter((result: IResult) => result.market_name === market);
   }, [memoizedResults, market]);
 
-  // Generate table rows dynamically
   const generateTableRows = useCallback(() => {
     return selectedMonthDates?.map((date) => (
       <tr key={date.toString()}>
