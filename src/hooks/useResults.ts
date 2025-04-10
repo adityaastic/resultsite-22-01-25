@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient, { apiClientNode, gameApiClient } from "../constants/api-client";
+import apiClient, { apiClientNode } from "../constants/api-client";
 
 const useResults = ({ date = '', market = '', active='',refund='' } = {}) => {
   const params = {
