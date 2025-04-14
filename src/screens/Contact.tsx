@@ -3,6 +3,7 @@ import { usePlayerData } from '../hooks/useHome';
 import { FormData } from '../Types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import "../App.css"
 
 const Contact = () => {
   const PlayerData = usePlayerData();
@@ -20,7 +21,7 @@ const Contact = () => {
     <div className="main-content">
       <Header/>
       <div className="container">
-        <h2 className="mb-4">Inquiries</h2>
+        <h2 className="mb-4" style={{color:'white'}}>Contact Us</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="form-sec">
           <div className="row">
             <div className="col-md-6">
@@ -64,13 +65,16 @@ const Contact = () => {
                 {errors.mobile && <p className='text-danger'>This field is required</p>}
               </div>
             </div>
+          
+           
+             
+            </div>
             <div className="form-group">
               <label htmlFor="comments" className="form-label">Message</label>
               <textarea {...register("comments")} id="comments" className="form-control" placeholder="Additional Comments" rows={5} />
             </div>
             <div className="form-group mb-0 text-center">
-              <button type="submit" className="btn btn-primary">Submit</button>
-            </div>
+            <button type="submit" className="contactBtn btn-primary">Submit</button>
           </div>
         </form>
       </div>

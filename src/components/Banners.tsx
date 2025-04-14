@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { websiteUrl } from '../assets/index.ts'
 import { useGreetingBanner, useNoticeBanner, useVisitors } from "../hooks/useHome.ts"
 import { useLatestResults } from "../hooks/useResults.ts"
+import "../App.css"
 
 export const GreetingBanner = () => {
   const { greetingBanner } = useGreetingBanner()
@@ -17,7 +18,7 @@ export const GreetingBanner = () => {
           {/* {(greetingBanner && !isLoading) &&  */}
           <div className="name1" 
           dangerouslySetInnerHTML={{ __html: greetingBanner?.ticker }}
-          style={{fontSize:"1.5rem"}}
+          style={{fontSize:"1.5rem",fontWeight:'bold'}}
           >
             {/* Welcome to BGM Game */}
           </div>
@@ -92,10 +93,10 @@ export const ResultsBanner = () => {
             border:"2px solid white"
           }}
         >
-          <h5 style={{ fontSize: "1.2rem", fontWeight: "600" }}>
+          <h5 style={{ fontSize: "1.2rem", fontWeight: "600",color:'white' }}>
             {latestResults?.latest_declared_result?.market_name || "Loading..."}
           </h5>
-          <p style={{ margin: "0.5rem 0 0" }}>
+          <p style={{ margin: "0.5rem 0 0",color:'white' }}>
             {latestResults?.latest_declared_result?.bet_key || "Waiting"}
           </p>
         </div>
@@ -112,10 +113,10 @@ export const ResultsBanner = () => {
             border:"2px solid white"
           }}
         >
-          <h5 style={{ fontSize: "1.2rem", fontWeight: "600" }}>
+          <h5 style={{ fontSize: "1.2rem", fontWeight: "600" ,color:'white'}}>
             {latestResults?.next_declared_result?.market_name || "Loading..."}
           </h5>
-          <p style={{ margin: "0.5rem 0 0" }}>
+          <p style={{ margin: "0.5rem 0 0" ,color:'white' }}>
             {latestResults?.next_declared_result?.bet_key || "Waiting"}
           </p>
         </div>

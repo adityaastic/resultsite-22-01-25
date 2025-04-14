@@ -4,8 +4,10 @@ import { Link, useLocation } from 'react-router-dom'
 const tabs = [
   { name: "Home", to: "/" },
   { name: "Results chart", to: "/results-chart" },
-  { name: "App & Games", to: "/apps-games" },
+  // { name: "App & Games", to: "/apps-games" },
+  { name: "About Us", to: "/about" },   // ✅ Added About Us Page
   // { name: "Guessing", to: "/guessing" },
+   
 ]
 
 const Header = () => {
@@ -40,4 +42,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;
