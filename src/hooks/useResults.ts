@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import apiClient, { gameApiClient } from "../constants/api-client";
+import apiClient, { apiClientNode } from "../constants/api-client";
 
 const useResults = ({ date = '', market = '', active='',refund='' } = {}) => {
   const params = {
@@ -29,7 +29,7 @@ export const useLatestResults = () => {
     refetch,
   } = useQuery({
     queryKey: ["Latest Results"],
-    queryFn: () => gameApiClient.get(`latest-two-result/`).then((res) => res.data),
+    queryFn: () => apiClientNode.get(`/latest-two-result`).then((res) => res.data),
   });
 
   return { latestResults, error, isLoading, refetch };

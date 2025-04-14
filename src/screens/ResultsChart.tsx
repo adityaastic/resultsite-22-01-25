@@ -7,7 +7,6 @@ import { getDatesOfMonth } from "../utils/time";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-// Function to get the current month in YYYY-MM format
 function getCurrentMonth() {
   const now = new Date();
   const year = now.getFullYear();
@@ -37,12 +36,17 @@ export const ResultsChart = () => {
     setSelectedMonthDates(dates);
   }, [date]);
 
-  // Ensure results is always an array
-  const memoizedResults = useMemo(() => {
-    return Array.isArray(rawResults) ? rawResults : [];
-  }, [rawResults]);
+  const memoizedResults = useMemo(() => (Array.isArray(rawResults) ? rawResults : []), [rawResults]);
 
-  const memoizedMarkets = useMemo(() => markets, [markets]);
+  const isCurrentMonth = useMemo(() => date === getCurrentMonth(), [date]);
+
+  const activeMarkets = useMemo(() => {
+    if (isCurrentMonth) {
+    
+      return markets?.filter((m: IMarket) => m.status === true);
+    }
+    return markets; 
+  }, [markets, isCurrentMonth]);
 
   const filteredResults = useMemo(() => {
     if (!market) return memoizedResults;
@@ -53,10 +57,11 @@ export const ResultsChart = () => {
     return selectedMonthDates?.map((date) => (
       <tr key={date.toString()}>
         <th>{moment(date).format("DD MM YYYY")}</th>
-        {memoizedMarkets?.map((market: IMarket) => {
-          const resultForMarket = filteredResults.find((res: IResult) =>
-            res.market_name === market.market &&
-            moment(res.created_at).format("DD MM YYYY") === moment(date).format("DD MM YYYY")
+        {activeMarkets?.map((market: IMarket) => {
+          const resultForMarket = filteredResults.find(
+            (res: IResult) =>
+              res.market_name === market.market &&
+              moment(res.created_at).format("DD MM YYYY") === moment(date).format("DD MM YYYY")
           );
           return (
             <td key={market.id} style={{ width: "5%", textAlign: "center" }}>
@@ -66,7 +71,7 @@ export const ResultsChart = () => {
         })}
       </tr>
     ));
-  }, [selectedMonthDates, filteredResults, memoizedMarkets]);
+  }, [selectedMonthDates, filteredResults, activeMarkets]);
 
   return (
     <>
@@ -94,7 +99,7 @@ export const ResultsChart = () => {
                 onChange={(e) => setMarket(e.target.value)}
               >
                 <option value="">Select Market</option>
-                {markets?.map((market: Card) => (
+                {activeMarkets?.map((market: Card) => (
                   <option value={market.market} key={market.market}>
                     {market.market}
                   </option>
@@ -107,15 +112,13 @@ export const ResultsChart = () => {
             <table className="table table-bordered table-hover ">
               <thead>
                 <tr>
-                  {memoizedMarkets && <th scope="col" style={{ width: "5%" }}>Date</th>}
-                  {memoizedMarkets?.map((market: IMarket) => (
+                  {activeMarkets && <th scope="col" style={{ width: "5%" }}>Date</th>}
+                  {activeMarkets?.map((market: IMarket) => (
                     <th key={market.id} scope="col">{market.market}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
-                {generateTableRows()}
-              </tbody>
+              <tbody>{generateTableRows()}</tbody>
             </table>
           </div>
         </div>

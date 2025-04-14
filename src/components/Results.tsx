@@ -25,7 +25,7 @@ export const ResultsGrid = () => {
     <>
       <div className="big-table">
         <div className="row g-0">
-          {markets?.map((market: IMarket) => <div className="col-md-6 ">
+          {markets?.filter((market: IMarket) => market.status)?.map((market: IMarket) => <div className="col-md-6 ">
             <div className="result-of ">
               <div className="boxes ">
                 <span>{market.market}</span>
@@ -47,15 +47,8 @@ export const ResultsGrid = () => {
 }
 
 export const ResultsTables = () => {
-
-  // const {active}  = useParams();
-  const  result  = useResults({active:"True",refund:"False"});
+  const result = useResults({ active: "True", refund: "False" });
   const { markets } = useMarkets();
-
-
-  console.log
-
-
 
   const [selectedMonthDates, setSelectedMonthDates] = useState<Date[]>([]);
 
@@ -66,45 +59,55 @@ export const ResultsTables = () => {
     setSelectedMonthDates(dates);
   }, []);
 
-  // Memoize the results and markets to avoid unnecessary re-renders
+  // Memoize the results to avoid unnecessary re-renders
   const memoizedResults = useMemo(() => result?.results || [], [result]);
-  const memoizedMarkets = useMemo(() => markets, [markets]);
+
+  // Filter markets where status is true (active markets)
+  const activeMarkets = useMemo(() => {
+    return markets?.filter((market: IMarket) => market.status === true);
+  }, [markets]);
 
   // Function to generate table rows, memoized to avoid unnecessary re-renders
   const generateTableRows = useCallback(() => {
-    return selectedMonthDates?.map(date => (
+    return selectedMonthDates?.map((date) => (
       <tr key={date.toString()}>
         <th>{moment(date).format("DD MM YYYY")}</th>
-        {memoizedMarkets?.map((market: IMarket) => {
-          const resultForMarket = memoizedResults?.find((res: IResult) => res.market_name === market.market && moment(res.created_at).format("DD MM YYYY") === moment(date).format("DD MM YYYY"));
+        {activeMarkets?.map((market: IMarket) => {
+          const resultForMarket = memoizedResults?.find(
+            (res: IResult) =>
+              res.market_name === market.market &&
+              moment(res.created_at).format("DD MM YYYY") === moment(date).format("DD MM YYYY")
+          );
           return (
-            <td key={market.id} style={{ width: "5%", textAlign: "center" }}>{resultForMarket ? resultForMarket.bet_key : ''}</td>
+            <td key={market.id} style={{ width: "5%", textAlign: "center" }}>
+              {resultForMarket ? resultForMarket.bet_key : ""}
+            </td>
           );
         })}
       </tr>
     ));
-  }, [selectedMonthDates, memoizedResults, memoizedMarkets]);
+  }, [selectedMonthDates, memoizedResults, activeMarkets]);
 
   return (
     <>
-    <div style={{display:"flex", justifyContent:"center", marginTop:"5rem"}}>
-    <div className="col-11" style={{border:"3px solid black"}} >
-      <div className="all-game-chart-title">All Game Yearly Charts</div>
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}>
+        <div className="col-11" style={{ border: "3px solid black" }}>
+          <div className="all-game-chart-title">All Game Yearly Charts</div>
 
-      <div className="table-responsive green-table">
-        <table className="table table-bordered table-hover ">
-          <thead>
-            <tr>
-              {memoizedMarkets && <th scope="col" style={{ width: "5%" }}>Date</th>}
-              {memoizedMarkets?.map((market: IMarket) => <th key={market.id} scope="col">{market.market}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {generateTableRows()}
-          </tbody>
-        </table>
-      </div>
-      </div>
+          <div className="table-responsive green-table">
+            <table className="table table-bordered table-hover ">
+              <thead>
+                <tr>
+                  {activeMarkets && <th scope="col" style={{ width: "5%" }}>Date</th>}
+                  {activeMarkets?.map((market: IMarket) => (
+                    <th key={market.id} scope="col">{market.market}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>{generateTableRows()}</tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </>
   );
