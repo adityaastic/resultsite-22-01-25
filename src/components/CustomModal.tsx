@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './CustomModal.css';
+import { Link } from 'react-router-dom';
 
 const CustomModal = () => {
   const [show, setShow] = useState(false);
@@ -31,7 +32,7 @@ const CustomModal = () => {
               <p>Yes, BGM Game follows all legal guidelines and ensures the best experience for its users.</p>
 
               <h5>3. How can I contact support?</h5>
-              <p>You can visit our <a href="/contact">Contact Page</a> for any assistance.</p>
+              <p>You can visit our <Link to="/contact">Contact Page</Link> for any assistance.</p>
 
               <h5>4. Is there any fee to play the game?</h5>
               <p>No, BGM Game is absolutely free to use for all users.</p>

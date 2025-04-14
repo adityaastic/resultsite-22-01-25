@@ -1,4 +1,4 @@
-import { InfoCard } from "../components/Cards.tsx"
+// import { InfoCard } from "../components/Cards.tsx"
 import Footer from "../components/Footer.tsx"
 import Header from "../components/Header.tsx"
 import "../App.css"
