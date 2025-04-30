@@ -12,7 +12,7 @@ const useMarkets = () => {
     queryKey: ["Markets"],
     queryFn: () =>
       gameApiClient
-        .get(`all-market/`)
+        .get(`all-market-result/`)
         .then((res) =>
           res.data.sort((a: IMarket, b:IMarket) => a.market_position - b.market_position)
         ),
